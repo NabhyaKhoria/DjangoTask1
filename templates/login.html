@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+       /* .col-1 {width: 8.33%;}
+        .col-2 {width: 16.66%;}
+          .col-3 {width: 25%;}
+         .col-4 {width: 33.33%;}
+         .col-5 {width: 41.66%;}
+       .col-6 {width: 50%;}
+        .col-7 {width: 58.33%;}
+       .col-8 {width: 66.66%;}
+        .col-9 {width: 75%;}
+        .col-10 {width: 83.33%;}
+        .col-11 {width: 91.66%;}
+        .col-12 {width: 100%;} 
+        .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+*/
+        #nkfinal {
+            background-image: url("{% static 'nkbg4.jpg' %}");
+            /*background-repeat: no-repeat;*/
+            /*background-attachment: fixed;
+            background-size: cover;*/
+            background-size: 100%;
+            height: 100%;
+            size: 100%;
+            /*background-position:0px 180px;*/
+        }
+        .nkm{
+            border: 1px solid gray;
+            /*position:relative;
+            top:50px;
+            left:400px;
+
+            
+            right:1px;*/
+            background-image: url("{% static 'nkmg4.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding:50px;
+            /*width:500px;*/
+            margin:auto;
+        }
+        h1{
+            font-size: 50px;
+            text-shadow: 1px 1px 2px black;
+        }
+        label{
+            font-size:20px;
+        }
+        #sub{
+            width:100px;
+            height:40px;
+        }
+        #sub:hover{
+            background-color: rgb(228, 218, 218);
+            background-image: url("{% static 'logo.png' %}");
+            background-repeat: no-repeat;
+            background-size: 50px 40px;
+            background-position:10%;
+            border: 2px solid;
+
+        }
+        .nkm2{
+            position:fixed;
+            bottom:0;
+            right:0;
+        }
+        #lg{
+            width:40px;
+            height:40px;
+        }
+        .header{
+            padding:15px;
+        }
+        /*@media only screen and (max-width: 600px) {
+
+  [class*="col-"] {
+    width: 100%;
+  }}*/
+    </style>
+</head>
+<body>
+
+<div class="container-fluid header">
+<img src="{% static 'ircelllogo2.png' %}" alt="logo" class="img-fluid" height="150">
+<br><br><ul class="nav nav-tabs">
+    <li class="nav-item"><a class="nav-link" href="register">Register</a></li>
+    <li class="nav-item"><a class="nav-link active" href="login">Login</a></li>
+</ul>
+</div>
+<div class="container-fluid" id="nkfinal"><br><br>
+<div class="row">
+   <div class="nkm col-md-7 col-lg-6 col-sm-10 offset-2 col-xl-5">
+<h1 class="text-center">Login</h1><br>
+<form name="myForm" method="post">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" onmouseover="this.style.border='1px solid red'" onmouseout="this.style.border='1px solid black'" onmousedown="this.style.border='2px solid red'" required><br><br>
+
+    <label for="pass">Password:</label>
+    <input type="password" id="pas" name="pas" onmouseover="this.style.border='1px solid red'" onmouseout="this.style.border='1px solid black'" onmousedown="this.style.border='2px solid red'" required><br><br>
+    <input type="submit" id="sub" value="Login">
+    <div class="container">
+        {% for message in messages %}
+        <p class="text-red" style="color:red">{{message}}</p>
+        {% endfor %}
+    </div>
+</form>
+</div>
+</div></div>
+<div class="nkm2"><a href="https://ircell.iitkgp.ac.in/" >
+<img src="{% static 'logo.png' %}" alt="logo" id="lg" title="Click me to visit us"></a>
+</div>
+</form>
+</div>
+<script>
+function nkover(id){
+    id.style.border="1px solid red";
+}
+function nkout(id){
+    id.style.border = "0px";
+}
+
+
+function validateForm(){
+    var x = document.forms["myForm"]["fname"].value;
+    if(x==""){
+        alert("First Name is required");
+        return false;
+    }
+    var y = document.forms["myForm"]["gender"].value;
+    if(y==""){
+        alert("Gender is required");
+        return false;
+    }
+    var z = document.forms["myForm"]["states"].value;
+    if(z==""){
+        alert("State is required");
+        return false;
+    }
+    var a = document.forms["myForm"]["pas"].value;
+    var b = a.toString();
+    var c = b.length;
+    if(c<8){
+        alert("Password too short");
+        return false;
+    }
+    else if(c>12){
+        alert("Password too long");
+        return false;
+    }
+    var d = document.forms["myForm"]["emid"].value;
+    var e = d.toString();
+    if(e.indexOf(".com")==-1&&e.indexOf(".in")==-1){
+        alert("Invalid Email");
+        return false;
+    }
+}
+</script>
+</body>
+</html>
